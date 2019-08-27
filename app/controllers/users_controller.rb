@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
 
+  #the purpose of this route is to render  the signup page
   get '/signup' do
-    erb :'/user/signup'
+    erb :'/signup'
   end
 
   get '/login' do
-    erb :'/user/login'
+    erb :'/login'
   end
 
   get '/logout' do

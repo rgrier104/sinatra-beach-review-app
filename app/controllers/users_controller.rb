@@ -1,15 +1,15 @@
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
 
   get '/signup' do
-    erb :signup
+    erb :'/user/signup'
   end
 
   get '/login' do
-    erb :login
+    erb :'/user/login'
   end
 
   get '/logout' do
-    erb :logout
+    erb :'/user/logout'
   end
 
 end

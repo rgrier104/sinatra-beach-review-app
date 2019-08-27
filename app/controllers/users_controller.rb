@@ -16,10 +16,14 @@ class UsersController < ApplicationController
     #authenticate password and
     if @user.authenticate(params[:password]) && user
       session[:user_id] = user.id
-      redirect to "/user/index"
+      redirect to "/users/#{:@user.id}"
     else
       redirect to "/login"
     end
+  end
+
+  get '/users/:id' do
+    erb :'user/index'
   end
 
   get '/logout' do

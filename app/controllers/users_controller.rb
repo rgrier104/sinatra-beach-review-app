@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     session[:user_id] = @user.id
 
-    redirect "/users/#{:@user.username}"
+    redirect "/users/#{@user.username}"
   end
 
   #the purpose of this route is to render the login page

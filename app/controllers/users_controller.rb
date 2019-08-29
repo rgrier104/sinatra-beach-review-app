@@ -5,12 +5,19 @@ class UsersController < ApplicationController
     erb :'/signup'
   end
 
-  #receive the signup form, create the user, and log the user in
+  #receive the signup form, check if user already has account,
+  # create the user, and log the user in
   post '/signup' do
-    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    session[:user_id] = @user.id
+    existing_user = User.find_by(username: params[:username], email: params[:email])
 
-    redirect "/users/#{@user.username}"
+    if !existing_user
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = @user.id
+
+      redirect "/users/#{@user.username}"
+    else
+      redirect "/login"
+    end
   end
 
   #the purpose of this route is to render the login page

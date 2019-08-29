@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   get '/users/:username' do
     @user = User.find(session[:user_id])
 
-    erb :'user/index'
+    erb :'users/index'
   end
 
   get '/logout' do
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     # else
     #   redirect "/"
     # end
-    erb :'/user/logout'
+    erb :'/users/logout'
   end
 
 end

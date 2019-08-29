@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       redirect "/users/#{@user.username}"
     else
       redirect "/login"
+      #maybe try to add error message
     end
   end
 
@@ -45,6 +46,12 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
+    # if logged_in?
+      session.clear
+      redirect "/login"
+    # else
+    #   redirect "/"
+    # end
     erb :'/user/logout'
   end
 

@@ -5,7 +5,7 @@ new review form
 
   List of beaches <br>
   <% Beach.all.each do |beach| %>
-  <input type="radio" name="<%= beach.id %>" value="<%= beach.id %>"><%= beach.name %></input><br>
+  <input type="radio" name="beach[id]" value="<%= beach.id %>"><%= beach.name %></input><br>
   <% end %>
   <br>
   Create New Beach: <br>

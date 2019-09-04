@@ -24,14 +24,24 @@ class ReviewsController < ApplicationController
     if !!params[:beach][:name] && !params[:beach][:id]
       @beach = Beach.create(params[:beach])
       @beach.reviews << @review
-    else
+    elsif !!params[:beach][:id]
       #find existing beach and add review
       @beach = Beach.find(params[:beach][:id])
       @beach.reviews << @review
+    else
+      #error message
+      redirect "/reviews/new"
     end
 
-    erb :"/reviews/show"
+    redirect "/reviews/#{@beach.name}"
 
+  end
+
+  #render reviews page with all reviews for selected beach
+  get '/reviews/:name' do
+    @beach = Beach.find_by(params[:name])
+
+    erb :"/reviews/show"
   end
 
 

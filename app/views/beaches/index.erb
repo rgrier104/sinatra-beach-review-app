@@ -1,1 +1,7 @@
 beach index
+
+<% Beach.all.each do |beach| %>
+<ul>
+  <li><%= beach.name %>, <%= beach.shore %>, <%= beach.city %></li>
+  <% end %>
+</ul>

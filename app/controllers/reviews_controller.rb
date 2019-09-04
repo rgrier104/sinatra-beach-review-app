@@ -7,8 +7,8 @@ class ReviewsController < ApplicationController
   end
 
   #route to render new review form
-  get '/revews/new' do
-    
+  get '/reviews/new' do
+
     erb :"/reviews/new"
   end
 

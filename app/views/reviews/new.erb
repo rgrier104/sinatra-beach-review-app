@@ -1,1 +1,22 @@
 new review form
+
+<form action='/reviews' method="POST">
+  <label for="beach[name]"> Beach Name: </label>
+  <input name="beach[name]" type="text">
+  <br>
+
+  <h3>Rating:</h3>
+    <input type="radio" name="review[rating]" value="1"> 1 <br>
+    <input type="radio" name="review[rating]" value="2"> 2 <br>
+    <input type="radio" name="review[rating]" value="3"> 3 <br>
+    <input type="radio" name="review[rating]" value="4"> 4 <br>
+    <input type="radio" name="review[rating]" value="5"> 5 <br>
+<br>
+
+  <label for="review[description]">Description: </label>
+  <input type="text" name="review[description]">
+
+  <input type="submit" name="submit" >
+
+
+</form>

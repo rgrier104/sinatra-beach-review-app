@@ -12,5 +12,27 @@ class ReviewsController < ApplicationController
     erb :"/reviews/new"
   end
 
+  #take new review params to create review/beach
+  post '/reviews' do
+
+    #create new review
+    @review = Review.create(params[:review])
+
+    #add beach or create new beach
+    #create new beach if id is empty and name is filled out
+    #add review to new beach
+    if !!params[:beach][:name] && !params[:beach][:id]
+      @beach = Beach.create(params[:beach])
+      @beach.reviews << @review
+    else
+      #find existing beach and add review
+      @beach = Beach.find(params[:beach][:id])
+      @beach.reviews << @review
+    end
+
+    erb :"/reviews/show"
+
+  end
+
 
 end

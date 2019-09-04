@@ -1,8 +1,17 @@
 new review form
 
 <form action='/reviews' method="POST">
-  <label for="beach[name]"> Beach Name: </label>
-  <input name="beach[name]" type="text">
+  <h3> Beach </h3>
+
+  List of beaches <br>
+  <% Beach.all.each do |beach| %>
+  <input type="radio" name="<%= beach.id %>" value="<%= beach.id %>"><%= beach.name %></input><br>
+  <% end %>
+  <br>
+  Create New Beach: <br>
+  Name: <input name="beach[name]" type="text">
+  Shore: <input name="beach[shore]" type="text">
+  City: <input name="beach[city]" type="text">
   <br>
 
   <h3>Rating:</h3>
@@ -13,8 +22,8 @@ new review form
     <input type="radio" name="review[rating]" value="5"> 5 <br>
 <br>
 
-  <label for="review[description]">Description: </label>
-  <input type="text" name="review[description]">
+  <label for="review[description]">Description: </label><br>
+  <textarea name="review[description]"></textarea>
 
   <input type="submit" name="submit" >
 

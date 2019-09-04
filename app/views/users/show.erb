@@ -1,0 +1,10 @@
+users show all reviews
+
+<h2> Welcome, <%= @user.username %>! </h2>
+
+<% @user.reviews.each do |review| %>
+<ul>
+  <li><%= review.description %></li>
+</ul>
+
+<% end %>

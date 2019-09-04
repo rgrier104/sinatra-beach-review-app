@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   get '/users/:username' do
     @user = User.find(session[:user_id])
 
-    erb :'users/index'
+    erb :'users/show'
   end
 
   get '/logout' do

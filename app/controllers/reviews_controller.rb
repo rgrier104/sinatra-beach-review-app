@@ -6,5 +6,11 @@ class ReviewsController < ApplicationController
     erb :"/reviews/index"
   end
 
+  #route to render new review form
+  get '/revews/new' do
+    
+    erb :"/reviews/new"
+  end
+
 
 end

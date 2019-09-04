@@ -7,5 +7,6 @@ end
 #in order to send PATCH and DELETE requests
 use Rack::MethodOverride
 # mount other controllers with use
+use ReviewsController
 use UsersController
 run ApplicationController

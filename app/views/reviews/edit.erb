@@ -15,8 +15,15 @@
 
   <label for="review[description]">Description: </label><br>
   <input type="text" name="review[description]" value="<%= @review.description %>">
+  <br><br>
+  <input type="submit" value="Update Review" >
 
-  <input type="submit" name="submit" >
 
+</form>
+<br>
+<!-- option to delete tweet -->
 
+<form method="post" action="/reviews/<%= @review.id %>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Review">
 </form>

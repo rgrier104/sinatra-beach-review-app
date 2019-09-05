@@ -6,13 +6,16 @@ user index
 <a href="/reviews/new">Create New Review</a> <a href="/logout">Log Out</a>
 <br>
 
+<h3>Your reviews:</h3>
+
 <% @user.reviews.each do |review| %>
 <% beach = Beach.find(review.beach_id) %>
 <ul>
-  <li><%= beach.name %>
+  <li><%= beach.name %> <a href="/reviews/<%= review.id %>/edit">(Edit)</a>
     <ul>
       <li>Rating: <%= review.rating %></li>
       <li>Description: <%= review.description %></li>
+      <li><a href="/beaches/<%= beach.slug %>">Other <%= beach.name %> Reviews</a></li>
     </ul>
   </li>
 </ul>

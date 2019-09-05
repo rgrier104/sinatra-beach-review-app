@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
     @user = User.find(session[:user_id])
 
     #add beach or create new beach
-binding.pry
+
     #show error message if user tries to select a beach and create a new beach
     if params[:beach][:name] != "" && !!params[:beach][:id]
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
@@ -82,18 +82,6 @@ binding.pry
 
   end
 
-  #route to review show page
-  get '/reviews/:id' do
-    if logged_in?
-      @review = Review.find(params[:id])
-
-      erb :"/reviews/show"
-    else
-      flash[:message] = "You must be logged in to view reviews."
-      erb :"/login"
-    end
-  end
-
   #route to edit review
   get '/reviews/:id/edit' do
 
@@ -103,9 +91,21 @@ binding.pry
       erb :"/reviews/edit"
     elsif logged_in?
       flash[:message] = "You cannot edit reviews you did not create."
-      redirect "/reviews/#{@review.id}"
+      erb :"/reviews/show"
     else
       flash[:message] = "You must be logged in to edit reviews."
+      erb :"/login"
+    end
+  end
+
+  #route to review show page
+  get '/reviews/:id' do
+    if logged_in?
+      @review = Review.find(params[:id])
+
+      erb :"/reviews/show"
+    else
+      flash[:message] = "You must be logged in to view reviews."
       erb :"/login"
     end
   end

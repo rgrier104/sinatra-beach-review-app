@@ -1,6 +1,7 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
+<br><br>
 
 <% beach = Beach.find(@review.beach_id) %>
 <%= beach.name %>
@@ -8,8 +9,9 @@
     <li>Rating: <%= @review.rating %></li>
     <li>Description: <%= @review.description %></li>
   </ul>
-  
+
   <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+
   <a href="/beaches/<%= beach.slug %>">All <%= beach.name %> Reviews</a>
 
 <a href="/reviews">All Reviews</a><a href="/beaches">All Beaches</a><a href="/logout">Log Out</a>

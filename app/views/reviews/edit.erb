@@ -1,1 +1,22 @@
-edit review form
+<h1>Edit Review</h1>
+
+<form action='/reviews' method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <%= @review.beach.name %>
+
+  <h3>Rating:</h3>
+    <input type="radio" name="review[rating]" value="1" <%='checked' if @review.rating == 1 %>> 1 <br>
+    <input type="radio" name="review[rating]" value="2" <%='checked' if @review.rating == 2 %>> 2 <br>
+    <input type="radio" name="review[rating]" value="3" <%='checked' if @review.rating == 3 %>> 3 <br>
+    <input type="radio" name="review[rating]" value="4" <%='checked' if @review.rating == 4 %>> 4 <br>
+    <input type="radio" name="review[rating]" value="5" <%='checked' if @review.rating == 5 %>> 5 <br>
+<br>
+
+  <label for="review[description]">Description: </label><br>
+  <textarea name="review[description]" placeholder="<%= @review.description %>"></textarea>
+
+  <input type="submit" name="submit" >
+
+
+</form>

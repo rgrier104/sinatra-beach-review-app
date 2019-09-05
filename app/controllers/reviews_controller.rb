@@ -30,9 +30,9 @@ class ReviewsController < ApplicationController
     @user = User.find(session[:user_id])
 
     #add beach or create new beach
-    binding.pry
+binding.pry
+    #show error message if user tries to select a beach and create a new beach
     if params[:beach][:name] != "" && !!params[:beach][:id]
-      #show error message if user tries to select a beach and create a new beach
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
       redirect "/reviews/new"
 
@@ -41,33 +41,43 @@ class ReviewsController < ApplicationController
       flash[:message] = "This beach already exists. Please select in list."
       redirect "/reviews/new"
 
+    #if rating is blank show error
+    elsif !params[:review][:rating]
+      flash[:message] = "Please enter rating."
+      redirect "/reviews/new"
+
+    #create new beach if id is empty and name is filled out
     elsif  params[:beach][:name] != "" && !params[:beach][:id]
-      #create new beach if id is empty and name is filled out
+
+      #ensure shore and city are filled out
         if params[:beach][:shore] == "" || params[:beach][:city] == ""
-          #ensure shore and city are filled out
+
           flash[:message] = "Please enter shore and city to continue."
           redirect "/reviews/new"
         else
-          #add review to new beach and user
           #create new review
           @review = Review.create(params[:review])
+          #create new beach
           @beach = Beach.create(params[:beach])
+          #add review to new beach and user
           @beach.reviews << @review
           @user.reviews << @review
         end
-
+    #if existing beach is selected
     elsif !!params[:beach][:id]
-      #find existing beach and add review
       #create new review
       @review = Review.create(params[:review])
+      #find beach
       @beach = Beach.find(params[:beach][:id])
+      #add review to beach and user
       @beach.reviews << @review
       @user.reviews << @review
     else
+      #error if the criteria above aren't met
       flash[:message] = "Please ensure form fields are filled out correctly."
       redirect "/reviews/new"
     end
-
+    #go to review show page
     redirect "/reviews/#{@review.id}"
 
   end

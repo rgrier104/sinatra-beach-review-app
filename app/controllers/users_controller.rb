@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 
   get '/users/:username' do
     @user = User.find(session[:user_id])
-
+    binding.pry
     erb :'users/show'
   end
 

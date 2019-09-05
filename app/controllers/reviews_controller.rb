@@ -28,11 +28,17 @@ class ReviewsController < ApplicationController
   post '/reviews' do
     #find user
     @user = User.find(session[:user_id])
+
     #add beach or create new beach
-    
+    binding.pry
     if params[:beach][:name] != "" && !!params[:beach][:id]
       #show error message if user tries to select a beach and create a new beach
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
+      redirect "/reviews/new"
+
+    #ensure new beach does not already exist;
+  elsif !!Beach.find_by_slug(params[:beach][:name].downcase.gsub(' ','-'))
+      flash[:message] = "This beach already exists. Please select in list."
       redirect "/reviews/new"
 
     elsif  params[:beach][:name] != "" && !params[:beach][:id]
@@ -58,7 +64,7 @@ class ReviewsController < ApplicationController
       @beach.reviews << @review
       @user.reviews << @review
     else
-      #error message
+      flash[:message] = "Please ensure form fields are filled out correctly."
       redirect "/reviews/new"
     end
 

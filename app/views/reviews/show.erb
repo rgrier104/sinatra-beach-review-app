@@ -3,13 +3,13 @@
 <% end %>
 
 <% beach = Beach.find(@review.beach_id) %>
-<li><%= beach.name %> <a href="/reviews/<%= @review.id %>/edit">(Edit)</a>
+<%= beach.name %>
   <ul>
     <li>Rating: <%= @review.rating %></li>
     <li>Description: <%= @review.description %></li>
-    <li><a href="/beaches/<%= beach.slug %>">Other <%= beach.name %> Reviews</a></li>
   </ul>
-</li>
-</ul>
+  
+  <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+  <a href="/beaches/<%= beach.slug %>">All <%= beach.name %> Reviews</a>
 
 <a href="/reviews">All Reviews</a><a href="/beaches">All Beaches</a><a href="/logout">Log Out</a>

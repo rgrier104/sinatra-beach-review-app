@@ -23,12 +23,12 @@ class ReviewsController < ApplicationController
     #find user
     @user = User.find(session[:user_id])
     #add beach or create new beach
-    if !!params[:beach][:name] && !!params[:beach][:id]
+    if params[:beach][:name] != "" && params[:beach][:id] != ""
       #show error message if user tries to select a beach and create a new beach
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
       redirect "/reviews/new"
 
-    elsif  !!params[:beach][:name] && !params[:beach][:id]
+    elsif  params[:beach][:name] != "" && params[:beach][:id] == ""
       #create new beach if id is empty and name is filled out
       #add review to new beach and user
       #create new review
@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
       @beach.reviews << @review
       @user.reviews << @review
 
-    elsif !!params[:beach][:id]
+    elsif params[:beach][:id] != ""
       #find existing beach and add review
       #create new review
       @review = Review.create(params[:review])
@@ -51,6 +51,13 @@ class ReviewsController < ApplicationController
 
     redirect "/reviews/#{@review.id}"
 
+  end
+
+  #route to review show page
+  get '/reviews/:id' do
+    @review = Review.find(params[:id])
+
+    erb :"/reviews/show"
   end
 
   #route to edit review

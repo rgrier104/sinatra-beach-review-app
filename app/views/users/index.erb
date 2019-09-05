@@ -2,12 +2,19 @@ user index
 
 <h2> Welcome, <%= @user.username %>! </h2>
 
+
+<a href="/reviews/new">Create New Review</a> <a href="/logout">Log Out</a>
+<br>
+
 <% @user.reviews.each do |review| %>
 <% beach = Beach.find(review.beach_id) %>
 <ul>
-  <li><%= beach.name %>: <%= review.rating %>, <%= review.description %></li>
+  <li><%= beach.name %>
+    <ul>
+      <li>Rating: <%= review.rating %></li>
+      <li>Description: <%= review.description %></li>
+    </ul>
+  </li>
 </ul>
 
 <% end %>
-
-<a href="/logout">Log Out</a>

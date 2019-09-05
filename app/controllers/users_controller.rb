@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  enable :sessions
+  use Rack::Flash
 
   #the purpose of this route is to render the signup page
   get '/signup' do
@@ -8,16 +10,23 @@ class UsersController < ApplicationController
   #receive the signup form, check if user already has account,
   # create the user, and log the user in
   post '/signup' do
-    existing_user = User.find_by(username: params[:username], email: params[:email])
+    existing_username = User.find_by(username: params[:username])
+    existing_email = User.find_by(email: params[:email])
 
-    if !existing_user
+    if !existing_username && !existing_email
+      #if there is not a user with that email or username create new user
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @user.id
 
       redirect "/users/#{@user.username}"
+    elsif existing_username && !existing_email
+      #if there is already a user with that username then have them change username
+      flash[:message] = "That username is already taken. Please use a different username."
+      redirect "/signup"
     else
+      flash[:message] = "It looks like you already have an account with that email. Please login."
       redirect "/login"
-      #maybe try to add error message
+
     end
   end
 

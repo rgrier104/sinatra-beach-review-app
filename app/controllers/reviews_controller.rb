@@ -27,16 +27,19 @@ class ReviewsController < ApplicationController
     @review = Review.create(params[:review])
 
     #add beach or create new beach
-    #create new beach if id is empty and name is filled out
-    #add review to new beach
-    
+
     if !!params[:beach][:name] && !!params[:beach][:id]
+      #show error message if user tries to select a beach and create a new beach
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
       redirect "reviews/new"
+
     elsif  !!params[:beach][:name] && !params[:beach][:id]
+      #create new beach if id is empty and name is filled out
+      #add review to new beach and user
       @beach = Beach.create(params[:beach])
       @beach.reviews << @review
       @user.reviews << @review
+
     elsif !!params[:beach][:id]
       #find existing beach and add review
       @beach = Beach.find(params[:beach][:id])

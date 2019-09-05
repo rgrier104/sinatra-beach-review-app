@@ -73,10 +73,14 @@ class ReviewsController < ApplicationController
 
   #route to edit review
   get '/reviews/:id/edit' do
-    if logged_in?
-      @review = Review.find(params[:id])
 
+    @review = Review.find(params[:id])
+
+    if logged_in? && current_user == @review.user_id
       erb :"/reviews/edit"
+    elsif logged_in?
+      flash[:message] = "You cannot edit reviews you did not create."
+      redirect "/reviews/#{@review.id}"
     else
       flash[:message] = "You must be logged in to edit reviews."
       erb :"/login"

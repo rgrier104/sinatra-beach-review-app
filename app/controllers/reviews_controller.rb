@@ -14,6 +14,8 @@ class ReviewsController < ApplicationController
 
   #take new review params to create review/beach
   post '/reviews' do
+    #find user
+    @user = User.find(session[:user_id])
 
     #create new review
     @review = Review.create(params[:review])
@@ -24,10 +26,12 @@ class ReviewsController < ApplicationController
     if !!params[:beach][:name] && !params[:beach][:id]
       @beach = Beach.create(params[:beach])
       @beach.reviews << @review
+      @user.reviews << @review
     elsif !!params[:beach][:id]
       #find existing beach and add review
       @beach = Beach.find(params[:beach][:id])
       @beach.reviews << @review
+      @user.reviews << @review
     else
       #error message
       redirect "/reviews/new"

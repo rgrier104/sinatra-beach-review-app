@@ -22,26 +22,25 @@ class ReviewsController < ApplicationController
   post '/reviews' do
     #find user
     @user = User.find(session[:user_id])
-
-    #create new review
-    @review = Review.create(params[:review])
-
     #add beach or create new beach
-
     if !!params[:beach][:name] && !!params[:beach][:id]
       #show error message if user tries to select a beach and create a new beach
       flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
-      redirect "reviews/new"
+      redirect "/reviews/new"
 
     elsif  !!params[:beach][:name] && !params[:beach][:id]
       #create new beach if id is empty and name is filled out
       #add review to new beach and user
+      #create new review
+      @review = Review.create(params[:review])
       @beach = Beach.create(params[:beach])
       @beach.reviews << @review
       @user.reviews << @review
 
     elsif !!params[:beach][:id]
       #find existing beach and add review
+      #create new review
+      @review = Review.create(params[:review])
       @beach = Beach.find(params[:beach][:id])
       @beach.reviews << @review
       @user.reviews << @review
@@ -80,6 +79,7 @@ class ReviewsController < ApplicationController
     else
       flash[:message] = "You cannot delete a review you did not write."
       redirect "/reviews/#{review.id}"
+    end
   end
 
 

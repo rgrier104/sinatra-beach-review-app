@@ -1,1 +1,8 @@
 review index
+
+<ul>
+<% Review.all.each do |review| %>
+<% beach = Beach.find(review.beach_id) %>
+  <li><%= beach.name %>, <%= review.rating %>, <%= review.description %></li>
+<% end %>
+</ul>

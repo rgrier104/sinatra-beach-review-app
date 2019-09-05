@@ -49,7 +49,7 @@ class ReviewsController < ApplicationController
       redirect "/reviews/new"
     end
 
-    redirect "/beaches/#{@beach.slug}"
+    redirect "/reviews/#{@review.id}"
 
   end
 
@@ -67,7 +67,7 @@ class ReviewsController < ApplicationController
     #update review
     @review.update(params[:review])
 
-    redirect "/reviews"
+    redirect "/reviews/#{@review.id}"
   end
 
   delete '/reviews/:id' do

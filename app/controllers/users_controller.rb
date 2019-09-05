@@ -40,18 +40,23 @@ class UsersController < ApplicationController
   end
 
   get '/users/:username' do
-    @user = User.find(session[:user_id])
+    if logged_in?
+      @user = User.find(session[:user_id])
 
-    erb :'users/index'
+      erb :'users/index'
+    else
+      flash[:message] = "You must be logged in to view user reviews."
+      erb :"/login"
+    end
   end
 
   get '/logout' do
-    # if logged_in?
+    if logged_in?
       session.clear
       redirect "/login"
-    # else
-    #   redirect "/"
-    # end
+    else
+      redirect "/login"
+    end
     erb :'/users/logout'
   end
 

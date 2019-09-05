@@ -1,6 +1,6 @@
 <h1>Edit Review</h1>
 
-<form action='/reviews' method="POST">
+<form action='/reviews/<%= @review.id %>' method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
 
   <%= @review.beach.name %>
@@ -14,7 +14,7 @@
 <br>
 
   <label for="review[description]">Description: </label><br>
-  <textarea name="review[description]" placeholder="<%= @review.description %>"></textarea>
+  <input type="text" name="review[description]" value="<%= @review.description %>">
 
   <input type="submit" name="submit" >
 

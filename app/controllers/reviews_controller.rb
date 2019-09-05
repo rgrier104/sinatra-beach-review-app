@@ -32,17 +32,11 @@ class ReviewsController < ApplicationController
       #error message
       redirect "/reviews/new"
     end
-    
+
     redirect "/reviews/#{@beach.slug}"
 
   end
 
-  #render reviews page with all reviews for selected beach
-  get '/reviews/:slug' do
-    @beach = Beach.find_by_slug(params[:slug])
-
-    erb :"/reviews/show"
-  end
 
 
 end

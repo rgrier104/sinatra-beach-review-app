@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
       redirect "/reviews/new"
     end
 
-    redirect "/reviews/#{@beach.slug}"
+    redirect "/beaches/#{@beach.slug}"
 
   end
 

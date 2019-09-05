@@ -1,12 +1,3 @@
 users show all reviews
 
-<h2> Welcome, <%= @user.username %>! </h2>
 
-<% @user.reviews.each do |review| %>
-
-  <% @beach = Beach.find[review.beach_id] %>
-<ul>
-  <li><%= @beach.name %>: <%= review.rating %>, <%= review.description %></li>
-</ul>
-
-<% end %>

@@ -8,14 +8,22 @@ class ReviewsController < ApplicationController
 
   #route to render reviews index
   get '/reviews' do
-
-    erb :"/reviews/index"
+    if logged_in?
+      erb :"/reviews/index"
+    else
+      flash[:message] = "You must be logged in to view reviews."
+      erb :"/login"
+    end
   end
 
   #route to render new review form
   get '/reviews/new' do
-
-    erb :"/reviews/new"
+    if logged_in?
+      erb :"/reviews/new"
+    else
+      flash[:message] = "You must be logged in to create reviews."
+      erb :"/login"
+    end
   end
 
   #take new review params to create review/beach
@@ -55,16 +63,26 @@ class ReviewsController < ApplicationController
 
   #route to review show page
   get '/reviews/:id' do
-    @review = Review.find(params[:id])
+    if logged_in?
+      @review = Review.find(params[:id])
 
-    erb :"/reviews/show"
+      erb :"/reviews/show"
+    else
+      flash[:message] = "You must be logged in to view reviews."
+      erb :"/login"
+    end
   end
 
   #route to edit review
   get '/reviews/:id/edit' do
-    @review = Review.find(params[:id])
+    if logged_in?
+      @review = Review.find(params[:id])
 
-    erb :"/reviews/edit"
+      erb :"/reviews/edit"
+    else
+      flash[:message] = "You must be logged in to edit reviews."
+      erb :"/login"
+    end
   end
 
   #edit review

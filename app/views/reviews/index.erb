@@ -3,6 +3,6 @@ review index
 <ul>
 <% Review.all.each do |review| %>
 <% beach = Beach.find(review.beach_id) %>
-  <li><%= beach.name %>, <%= review.rating %>, <%= review.description %></li>
+  <li><%= beach.name %>, <%= review.rating %>, <%= review.description %> <a href="/reviews/<%= review.id %>/edit">Edit</a></li>
 <% end %>
 </ul>

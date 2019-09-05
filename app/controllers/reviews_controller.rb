@@ -71,5 +71,16 @@ class ReviewsController < ApplicationController
     redirect "/reviews"
   end
 
+  delete '/reviews/:id' do
+    #find review
+    review = Review.find(params[:id])
+    #only let user delete review if they created it
+    if review.user_id == session[:user_id]
+      review.destroy
+    else
+      flash[:message] = "You cannot delete a review you did not write."
+      redirect "/reviews/#{review.id}"
+  end
+
 
 end

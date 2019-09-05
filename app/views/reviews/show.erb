@@ -1,0 +1,11 @@
+review show Page
+
+<% beach = Beach.find(@review.beach_id) %>
+<li><%= beach.name %> <a href="/reviews/<%= @review.id %>/edit">(Edit)</a>
+  <ul>
+    <li>Rating: <%= @review.rating %></li>
+    <li>Description: <%= @review.description %></li>
+    <li><a href="/beaches/<%= beach.slug %>">Other <%= beach.name %> Reviews</a></li>
+  </ul>
+</li>
+</ul>

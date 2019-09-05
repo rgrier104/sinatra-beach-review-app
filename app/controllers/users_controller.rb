@@ -44,6 +44,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "/users/#{@user.username}"
     else
+      flash[:message] = "Your email and password combination is not correct."
       redirect to "/login"
     end
   end

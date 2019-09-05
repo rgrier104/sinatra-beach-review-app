@@ -1,4 +1,6 @@
-review show Page
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 
 <% beach = Beach.find(@review.beach_id) %>
 <li><%= beach.name %> <a href="/reviews/<%= @review.id %>/edit">(Edit)</a>

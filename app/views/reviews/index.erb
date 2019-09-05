@@ -1,4 +1,6 @@
-review index
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 
 <ul>
 <% Review.all.each do |review| %>

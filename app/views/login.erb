@@ -1,4 +1,6 @@
-login
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 
 <form action='/login' method="POST">
 
@@ -8,3 +10,5 @@ login
 
   <input type="submit" name="submit">
 </form>
+
+No account? <a href="/signup">Sign Up!</a>

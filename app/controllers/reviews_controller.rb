@@ -12,6 +12,13 @@ class ReviewsController < ApplicationController
     erb :"/reviews/new"
   end
 
+  #route to edit review
+  get '/reviews/:id/edit' do
+    @review = Review.find(params[:id])
+    
+    erb :"/reviews/edit"
+  end
+
   #take new review params to create review/beach
   post '/reviews' do
     #find user

@@ -1,5 +1,9 @@
 new review form
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <form action='/reviews' method="POST">
   <h3> Beach </h3>
 

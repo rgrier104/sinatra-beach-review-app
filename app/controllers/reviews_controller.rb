@@ -1,4 +1,10 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class ReviewsController < ApplicationController
+
+  enable :sessions
+  use Rack::Flash
 
   #route to render reviews index
   get '/reviews' do
@@ -23,7 +29,11 @@ class ReviewsController < ApplicationController
     #add beach or create new beach
     #create new beach if id is empty and name is filled out
     #add review to new beach
-    if !!params[:beach][:name] && !params[:beach][:id]
+    
+    if !!params[:beach][:name] && !!params[:beach][:id]
+      flash[:message] = "You cannot have a beach selected and create a new beach. Please choose one."
+      redirect "reviews/new"
+    elsif  !!params[:beach][:name] && !params[:beach][:id]
       @beach = Beach.create(params[:beach])
       @beach.reviews << @review
       @user.reviews << @review

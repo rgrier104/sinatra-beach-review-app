@@ -4,7 +4,7 @@ show beach
 <ul>
 <% @beach.reviews.each do |review| %>
 
-  <li><%= review.rating %>, <%= review.description %> </li>
+  <li><%= review.rating %>, <%= review.description %>, <a href="/reviews/<%= review.id %>/edit">View</a> </li>
 
 <% end %>
 </ul>

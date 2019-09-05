@@ -1,7 +1,6 @@
-beach index
 
-<% Beach.all.each do |beach| %>
 <ul>
-  <li><a href="/reviews/<%= beach.slug %>"><%= beach.name %>, <%= beach.shore %>, <%= beach.city %></a></li>
+<% Beach.all.each do |beach| %>
+  <li><a href="/beaches/<%= beach.slug %>"><%= beach.name %>, <%= beach.shore %>, <%= beach.city %></a></li>
   <% end %>
 </ul>

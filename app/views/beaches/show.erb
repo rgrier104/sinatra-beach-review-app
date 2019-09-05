@@ -1,9 +1,10 @@
 show beach
 
 <%= @beach.name %> <br>
-
-<% @beach.reviews.each do |review| %>
 <ul>
+<% @beach.reviews.each do |review| %>
+
   <li><%= review.rating %>, <%= review.description %> </li>
-</ul>
+
 <% end %>
+</ul>

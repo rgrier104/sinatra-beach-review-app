@@ -3,11 +3,11 @@
 <% end %>
 
 <form action='/signup' method="POST">
-  Email: <input type="text" name="email">
+  Email: <input type="text" name="email" required>
 
-  Username: <input type="text" name="username">
+  Username: <input type="text" name="username" required>
 
-  Passowrd: <input type="text" name="password">
+  Passowrd: <input type="password" name="password" required>
 
   <input type="submit" name="submit">
 </form>

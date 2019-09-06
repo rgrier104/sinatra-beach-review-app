@@ -4,15 +4,16 @@
   <%= flash[:message] %>
 <% end %>
 
-<form action='/reviews' method="POST">
-  <h3> Beach </h3>
+<h2>Create New Beach Review</h2>
 
-  Choose from current beaches with reviews: <br>
+<form action='/reviews' method="POST">
+
+  Choose from current beaches with reviews or create new beach: <br>
   <% Beach.all.each do |beach| %>
   <input type="radio" name="beach[id]" value="<%= beach.id %>"><%= beach.name %></input><br>
   <% end %>
   <br>
-  Or Create New Beach: <br>
+  <br>
   Name: <input name="beach[name]" type="text">
   Shore: <input name="beach[shore]" type="text">
   City: <input name="beach[city]" type="text">

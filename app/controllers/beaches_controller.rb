@@ -5,6 +5,7 @@ class BeachesController < ApplicationController
   #render beaches index page
   get '/beaches' do
     if logged_in?
+      @user = User.find(session[:user_id])
       erb :'/beaches/index'
     else
       flash[:message] = "You must be logged in to view beaches."
@@ -16,7 +17,7 @@ class BeachesController < ApplicationController
   get '/beaches/:slug' do
     if logged_in?
       @beach = Beach.find_by_slug(params[:slug])
-
+      @user = User.find(session[:user_id])
       erb :'/beaches/show'
     else
       flash[:message] = "You must be logged in to view reviews."

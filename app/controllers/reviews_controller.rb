@@ -1,3 +1,5 @@
+require 'sinatra/base'
+require 'rack-flash'
 
 class ReviewsController < ApplicationController
 
@@ -79,16 +81,30 @@ class ReviewsController < ApplicationController
       redirect "/reviews/new"
     end
     #go to review show page
+
     redirect "/reviews/#{@review.id}"
 
+  end
+
+  #route to review show page
+  get '/reviews/:id' do
+    if logged_in?
+      @review = Review.find(params[:id])
+      @user = current_user
+      erb :"/reviews/show"
+    else
+      flash[:message] = "You must be logged in to view reviews."
+      erb :"/login"
+    end
   end
 
   #route to edit review
   get '/reviews/:id/edit' do
 
     @review = Review.find(params[:id])
-
-    if logged_in? && current_user == @review.user_id
+    @user = current_user
+binding.pry
+    if logged_in? && current_user.id == @review.user_id
       erb :"/reviews/edit"
     elsif logged_in?
       flash[:message] = "You cannot edit reviews you did not create."
@@ -99,17 +115,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  #route to review show page
-  get '/reviews/:id' do
-    if logged_in?
-      @review = Review.find(params[:id])
-
-      erb :"/reviews/show"
-    else
-      flash[:message] = "You must be logged in to view reviews."
-      erb :"/login"
-    end
-  end
 
   #edit review
   patch '/reviews/:id' do

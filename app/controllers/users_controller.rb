@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   #the purpose of this route is to render the login page
   get '/login' do
+    
     erb :'/login'
   end
 
@@ -39,8 +40,12 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(email: params[:email])
 
+    #if user is not in database, redirect to signup page
+    if !@user
+      flash[:message] = "You do not have an account. Please sign up."
+      redirect to "/login"
     #authenticate password and confirm user has account in database
-    if @user.authenticate(params[:password]) && @user
+    elsif @user.authenticate(params[:password]) && @user
       session[:user_id] = @user.id
       redirect to "/users/#{@user.username}"
     else

@@ -103,7 +103,7 @@ class ReviewsController < ApplicationController
 
     @review = Review.find(params[:id])
     @user = current_user
-binding.pry
+
     if logged_in? && current_user.id == @review.user_id
       erb :"/reviews/edit"
     elsif logged_in?

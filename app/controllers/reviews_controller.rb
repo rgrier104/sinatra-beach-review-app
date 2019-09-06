@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
   #route to render reviews index
   get '/reviews' do
     if logged_in?
+      @user = User.find(session[:user_id])
       erb :"/reviews/index"
     else
       flash[:message] = "You must be logged in to view reviews."

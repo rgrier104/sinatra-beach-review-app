@@ -1,3 +1,6 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class UsersController < ApplicationController
   enable :sessions
   use Rack::Flash
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
 
   #the purpose of this route is to render the login page
   get '/login' do
-    
+
     erb :'/login'
   end
 

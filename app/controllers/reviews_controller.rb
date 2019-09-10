@@ -65,6 +65,7 @@ class ReviewsController < ApplicationController
           #add review to new beach and user
           @beach.reviews << @review
           @user.reviews << @review
+          flash[:message] = "Successfully created review."
         end
     #if existing beach is selected
     elsif !!params[:beach][:id]
@@ -75,6 +76,7 @@ class ReviewsController < ApplicationController
       #add review to beach and user
       @beach.reviews << @review
       @user.reviews << @review
+      flash[:message] = "Successfully created review."
     else
       #error if the criteria above aren't met
       flash[:message] = "Please ensure form fields are filled out correctly."
@@ -122,7 +124,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     #update review
     @review.update(params[:review])
-
+    flash[:message] = "Successfully updated review."
     redirect "/reviews/#{@review.id}"
   end
 
@@ -132,6 +134,7 @@ class ReviewsController < ApplicationController
     #only let user delete review if they created it
     if review.user_id == session[:user_id]
       review.destroy
+      flash[:message] = "Successfully deleted review."
       redirect "/reviews"
     else
       flash[:message] = "You cannot delete a review you did not write."

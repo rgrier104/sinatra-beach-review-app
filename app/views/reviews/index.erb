@@ -5,7 +5,7 @@
 <ul>
 <% Review.all.each do |review| %>
 <% beach = Beach.find(review.beach_id) %>
-  <li><%= beach.name %>, <%= review.rating %>, <%= review.description %> <a href="/reviews/<%= review.id %>/edit">Edit</a></li>
+  <li><%= beach.name %>, <%= review.rating %>, <%= review.description %> <a href="/reviews/<%= review.id %>">View</a></li>
 <% end %>
 </ul>
 

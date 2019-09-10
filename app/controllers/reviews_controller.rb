@@ -1,10 +1,10 @@
 require 'sinatra/base'
-require 'rack-flash'
+require 'sinatra/flash'
 
 class ReviewsController < ApplicationController
 
   enable :sessions
-  use Rack::Flash
+  register Sinatra::Flash
 
   #route to render reviews index
   get '/reviews' do

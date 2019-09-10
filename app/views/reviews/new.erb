@@ -1,6 +1,6 @@
 
 
-<% if flash.has?(:message) %>
+<% if !!flash(:message) %>
   <%= flash[:message] %>
 <% end %>
 

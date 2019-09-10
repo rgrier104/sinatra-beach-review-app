@@ -1,9 +1,9 @@
 require 'sinatra/base'
-require 'rack-flash'
+require 'sinatra/flash'
 
 class UsersController < ApplicationController
   enable :sessions
-  use Rack::Flash
+  register Sinatra::Flash
 
   #the purpose of this route is to render the signup page
   get '/signup' do

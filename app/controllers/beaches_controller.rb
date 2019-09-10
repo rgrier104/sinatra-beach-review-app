@@ -1,6 +1,9 @@
+require 'sinatra/base'
+require 'sinatra/flash'
+
 class BeachesController < ApplicationController
   enable :sessions
-  use Rack::Flash
+  register Sinatra::Flash
 
   #render beaches index page
   get '/beaches' do

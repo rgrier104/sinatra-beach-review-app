@@ -3,18 +3,18 @@
 <% end %>
 <br><br>
 
-<% beach = Beach.find(@review.beach_id) %>
-<% author = User.find(@review.user_id) %>
-<%= beach.name %>
+
+<%= @review.beach.name %>
   <ul>
     <li>Rating: <%= @review.rating %></li>
     <li>Description: <%= @review.description %></li>
-    <li>Written By: <%= author.username %></li>
+    <li>Written By: <%= @review.user.username %></li>
   </ul>
 
 
-
+<% if @review.user_id == current_user.id %>
   <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+<% end %>
 
   <a href="/users/<%= @user.username %>">Home</a>
 

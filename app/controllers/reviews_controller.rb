@@ -19,16 +19,13 @@ class ReviewsController < ApplicationController
 
   #route to render new review form
   get '/reviews/new' do
-    if logged_in?
+      redirect_if_not_logged_in
       erb :"/reviews/new"
-    else
-      flash[:message] = "You must be logged in to create reviews."
-      erb :"/login"
-    end
   end
 
   #take new review params to create review/beach
   post '/reviews' do
+    redirect_if_not_logged_in
     #find user
     @user = User.find(session[:user_id])
 
@@ -90,7 +87,9 @@ class ReviewsController < ApplicationController
 
   #route to review show page
   get '/reviews/:id' do
-    if logged_in?
+    if !Review.find_by(id: params[:id])
+      redirect "/reviews"
+    elsif logged_in?
       @review = Review.find(params[:id])
       @user = current_user
       erb :"/reviews/show"
@@ -102,18 +101,15 @@ class ReviewsController < ApplicationController
 
   #route to edit review
   get '/reviews/:id/edit' do
-
+    redirect_if_not_logged_in
     @review = Review.find(params[:id])
     @user = current_user
 
-    if logged_in? && current_user.id == @review.user_id
+    if current_user.id == @review.user_id
       erb :"/reviews/edit"
-    elsif logged_in?
+    else
       flash[:message] = "You cannot edit reviews you did not create."
       erb :"/reviews/show"
-    else
-      flash[:message] = "You must be logged in to edit reviews."
-      erb :"/login"
     end
   end
 
@@ -122,10 +118,15 @@ class ReviewsController < ApplicationController
   patch '/reviews/:id' do
     #find review
     @review = Review.find(params[:id])
+    if logged_in? && current_user.id == @review.user_id
     #update review
-    @review.update(params[:review])
-    flash[:message] = "Successfully updated review."
-    redirect "/reviews/#{@review.id}"
+      @review.update(params[:review])
+      flash[:message] = "Successfully updated review."
+      redirect "/reviews/#{@review.id}"
+    else
+      flash[:message] = "You cannot edit a review you did not create."
+      redirect "/reviews/#{@review.id}"
+    end
   end
 
   delete '/reviews/:id' do
